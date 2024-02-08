@@ -16,6 +16,7 @@
 		6C0CA3492B7175420068B211 /* RestaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0CA3482B7175420068B211 /* RestaurantTests.swift */; };
 		6C0CA3532B7175420068B211 /* RestaurantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0CA3522B7175420068B211 /* RestaurantUITests.swift */; };
 		6C0CA3552B7175420068B211 /* RestaurantUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0CA3542B7175420068B211 /* RestaurantUITestsLaunchTests.swift */; };
+		6C25D2072B7552EE00F78263 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25D2062B7552EE00F78263 /* Onboarding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		6C0CA34E2B7175420068B211 /* RestaurantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RestaurantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C0CA3522B7175420068B211 /* RestaurantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantUITests.swift; sourceTree = "<group>"; };
 		6C0CA3542B7175420068B211 /* RestaurantUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6C25D2062B7552EE00F78263 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				6C0CA33B2B7175420068B211 /* Persistence.swift */,
 				6C0CA33D2B7175420068B211 /* Restaurant.xcdatamodeld */,
 				6C0CA3382B7175420068B211 /* Preview Content */,
+				6C25D2062B7552EE00F78263 /* Onboarding.swift */,
 			);
 			path = Restaurant;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			files = (
 				6C0CA33F2B7175420068B211 /* Restaurant.xcdatamodeld in Sources */,
 				6C0CA33C2B7175420068B211 /* Persistence.swift in Sources */,
+				6C25D2072B7552EE00F78263 /* Onboarding.swift in Sources */,
 				6C0CA3352B71753F0068B211 /* ContentView.swift in Sources */,
 				6C0CA3332B71753F0068B211 /* RestaurantApp.swift in Sources */,
 			);
