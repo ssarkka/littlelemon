@@ -10,28 +10,36 @@ import SwiftUI
 let kFirstName = "first name key"
 let kLastName = "last name key"
 let kEmail = "email key"
+let kIsLoggedIn = "kIsLoggedIn"
 
 struct Onboarding: View {
     @State private var firstName:String = ""
     @State private var lastName:String = ""
     @State private var email:String = ""
     
+    @State private var isLoggedIn:Bool = false
+    
     var body: some View {
-        
-        Form{
-            VStack {
-                TextField("First name", text: $firstName)
-                TextField("Last name", text: $lastName)
-                TextField("Email", text: $email)
-                Button("Register") {
-                    if !firstName.isEmpty {
-                        UserDefaults.standard.set(firstName, forKey: kFirstName)
+        NavigationStack {
+            Form {
+                VStack {
+                    TextField("First name", text: $firstName)
+                    TextField("Last name", text: $lastName)
+                    TextField("Email", text: $email)
+                    Button("Register") {
+                        if !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty {
+                            UserDefaults.standard.set(firstName, forKey: kFirstName)
+                            UserDefaults.standard.set(lastName, forKey: kLastName)
+                            UserDefaults.standard.set(email, forKey: kEmail)
+                            UserDefaults.standard.set(true, forKey: kIsLoggedIn)
+                            isLoggedIn = true
+                        }
                     }
-                    if !lastName.isEmpty {
-                        UserDefaults.standard.set(lastName, forKey: kLastName)
-                    }
-                    if !email.isEmpty {
-                        UserDefaults.standard.set(email, forKey: kEmail)
+                }.navigationDestination(isPresented: $isLoggedIn) {
+                    Home()
+                }.onAppear {
+                    if UserDefaults.standard.bool(forKey: kIsLoggedIn) {
+                        isLoggedIn = true
                     }
                 }
             }
