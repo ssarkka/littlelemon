@@ -1,8 +1,5 @@
 //
-//  RestaurantApp.swift
-//  Restaurant
-//
-//  Created by Simo Särkkä on 5.2.2024.
+// The main app entry point
 //
 
 import SwiftUI
@@ -13,10 +10,6 @@ struct RestaurantApp: App {
 
     var body: some Scene {
         WindowGroup {
-            /*
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-             */
             Onboarding()
         }
     }

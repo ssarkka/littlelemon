@@ -1,8 +1,5 @@
 //
-//  Onboarding.swift
-//  Restaurant
-//
-//  Created by Simo Särkkä on 8.2.2024.
+// Obboarding screen which asks for login information
 //
 
 import SwiftUI
@@ -18,29 +15,67 @@ struct Onboarding: View {
     @State private var email:String = ""
     
     @State private var isLoggedIn:Bool = false
+    @State private var firstTime = true
     
     var body: some View {
         NavigationStack {
-            Form {
-                VStack {
+            Header(showProfilePhoto: false)
+            Hero(searchString: Binding.constant(""), hasSearchField: false)
+            VStack {
+                VStack(alignment: .leading) {
+                    Text("First name*")
+                        .font(.custom("Karla", size: 16))
+                        .bold()
                     TextField("First name", text: $firstName)
+                        .font(.custom("Karla", size: 16))
+                        .textFieldStyle(.roundedBorder)
+                        .border(Color("Secondary4"))
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
+                    Text("Last name*")
+                        .font(.custom("Karla", size: 16))
+                        .bold()
                     TextField("Last name", text: $lastName)
+                        .font(.custom("Karla", size: 16))
+                        .textFieldStyle(.roundedBorder)
+                        .border(Color("Secondary4"))
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
+                    Text("Email*")
+                        .font(.custom("Karla", size: 16))
+                        .bold()
                     TextField("Email", text: $email)
-                    Button("Register") {
-                        if !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty {
-                            UserDefaults.standard.set(firstName, forKey: kFirstName)
-                            UserDefaults.standard.set(lastName, forKey: kLastName)
-                            UserDefaults.standard.set(email, forKey: kEmail)
-                            UserDefaults.standard.set(true, forKey: kIsLoggedIn)
-                            isLoggedIn = true
-                        }
-                    }
-                }.navigationDestination(isPresented: $isLoggedIn) {
-                    Home()
-                }.onAppear {
-                    if UserDefaults.standard.bool(forKey: kIsLoggedIn) {
+                        .font(.custom("Karla", size: 16))
+                        .textFieldStyle(.roundedBorder)
+                        .border(Color("Secondary4"))
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
+                }
+                Button("Register") {
+                    if !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty {
+                        UserDefaults.standard.set(firstName, forKey: kFirstName)
+                        UserDefaults.standard.set(lastName, forKey: kLastName)
+                        UserDefaults.standard.set(email, forKey: kEmail)
+                        UserDefaults.standard.set(true, forKey: kIsLoggedIn)
+                        firstTime = true
                         isLoggedIn = true
                     }
+                }
+                .font(.custom("Karla", size: 16))
+                .foregroundColor(.black)
+                .background(Color("Primary2"))
+                .buttonBorderShape(.roundedRectangle)
+                .buttonStyle(.bordered)
+                Spacer()
+            }
+            .padding()
+            .navigationDestination(isPresented: $isLoggedIn) {
+                Home(showingAlert1: firstTime)
+            }
+            .onAppear {
+                if UserDefaults.standard.bool(forKey: kIsLoggedIn) {
+                    isLoggedIn = true
+                    firstTime = false
                 }
             }
         }

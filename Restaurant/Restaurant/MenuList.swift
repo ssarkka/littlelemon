@@ -1,8 +1,5 @@
 //
-//  MenuList.swift
-//  Restaurant
-//
-//  Created by Simo Särkkä on 8.2.2024.
+// The whole menu in JSON
 //
 
 import Foundation
