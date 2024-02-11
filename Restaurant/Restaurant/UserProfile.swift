@@ -1,8 +1,5 @@
 //
-//  UserProfile.swift
-//  Restaurant
-//
-//  Created by Simo Särkkä on 8.2.2024.
+// Show and edit personal information
 //
 
 import SwiftUI
@@ -18,42 +15,66 @@ struct UserProfile: View {
     var body: some View {
         VStack(spacing: 0) {
             Header(showProfilePhoto: false)
-            
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Personal information")
-                    .font(.custom("Karla", size: 18))
-                    .bold()
+            Spacer().frame(height: 10)
+            Divider().frame(height: 20).overlay(Color("Primary1"))
 
-                Text("avatar")
-                HStack {
-                    Image("profile-image-placeholder")
-                        .resizable()
-                        .frame(width: 100, height: 100)
+            VStack(alignment: .center, spacing: 10) {
+                Section {
+                    Text("Personal information")
+                        .font(.custom("Karla", size: 18))
+                        .bold()
                     
-                    Button("Change") {}
-                    .font(.custom("Karla", size: 16))
-                    .foregroundColor(.white)
-                    .background(Color("Primary1"))
-                    .buttonBorderShape(.roundedRectangle)
-                    .buttonStyle(.bordered)
-
-                    Button("Remove") {}
-                    .font(.custom("Karla", size: 16))
-                    .foregroundColor(.black)
-                    .background(Color("Primary2"))
-                    .buttonBorderShape(.roundedRectangle)
-                    .buttonStyle(.bordered)
-                    Spacer()
+                    Text("avatar")
+                    HStack {
+                        Image("profile-image-placeholder")
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                        
+                        Button("Change") {}
+                            .font(.custom("Karla", size: 16))
+                            .foregroundColor(.white)
+                            .background(Color("Primary1"))
+                            .buttonBorderShape(.roundedRectangle)
+                            .buttonStyle(.bordered)
+                        
+                        Button("Remove") {}
+                            .font(.custom("Karla", size: 16))
+                            .foregroundColor(.black)
+                            .background(Color("Primary2"))
+                            .buttonBorderShape(.roundedRectangle)
+                            .buttonStyle(.bordered)
+//                        Spacer()
+                    }
                 }
+                
+                Divider().frame(height: 2).overlay(Color("Primary1"))
+                
                 VStack(alignment: .leading) {
                     Text("First name*")
+                        .font(.custom("Karla", size: 16))
+                        .bold()
                     TextField("First name", text: $firstName)
+                        .font(.custom("Karla", size: 16))
                         .textFieldStyle(.roundedBorder)
+                        .border(Color("Secondary4"))
+                        .disableAutocorrection(true)
                     Text("Last name*")
+                        .font(.custom("Karla", size: 16))
+                        .bold()
                     TextField("Last name", text: $lastName)
+                        .font(.custom("Karla", size: 16))
+                        .textFieldStyle(.roundedBorder)
+                        .border(Color("Secondary4"))
+                        .disableAutocorrection(true)
                     Text("Email*")
+                        .font(.custom("Karla", size: 16))
+                        .bold()
                     TextField("Email", text: $email)
                         .font(.custom("Karla", size: 16))
+                        .textFieldStyle(.roundedBorder)
+                        .border(Color("Secondary4"))
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
                 }
             }.padding()
             
@@ -100,6 +121,7 @@ struct UserProfile: View {
     }
 }
 
+// Default preview
 #Preview {
     UserProfile()
 }

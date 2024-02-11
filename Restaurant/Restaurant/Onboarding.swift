@@ -1,8 +1,5 @@
 //
-//  Onboarding.swift
-//  Restaurant
-//
-//  Created by Simo Särkkä on 8.2.2024.
+// Obboarding screen which asks for login information
 //
 
 import SwiftUI
@@ -18,6 +15,7 @@ struct Onboarding: View {
     @State private var email:String = ""
     
     @State private var isLoggedIn:Bool = false
+    @State private var firstTime = true
     
     var body: some View {
         NavigationStack {
@@ -26,13 +24,32 @@ struct Onboarding: View {
             VStack {
                 VStack(alignment: .leading) {
                     Text("First name*")
+                        .font(.custom("Karla", size: 16))
+                        .bold()
                     TextField("First name", text: $firstName)
+                        .font(.custom("Karla", size: 16))
                         .textFieldStyle(.roundedBorder)
+                        .border(Color("Secondary4"))
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
                     Text("Last name*")
+                        .font(.custom("Karla", size: 16))
+                        .bold()
                     TextField("Last name", text: $lastName)
+                        .font(.custom("Karla", size: 16))
+                        .textFieldStyle(.roundedBorder)
+                        .border(Color("Secondary4"))
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
                     Text("Email*")
+                        .font(.custom("Karla", size: 16))
+                        .bold()
                     TextField("Email", text: $email)
                         .font(.custom("Karla", size: 16))
+                        .textFieldStyle(.roundedBorder)
+                        .border(Color("Secondary4"))
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
                 }
                 Button("Register") {
                     if !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty {
@@ -40,6 +57,7 @@ struct Onboarding: View {
                         UserDefaults.standard.set(lastName, forKey: kLastName)
                         UserDefaults.standard.set(email, forKey: kEmail)
                         UserDefaults.standard.set(true, forKey: kIsLoggedIn)
+                        firstTime = true
                         isLoggedIn = true
                     }
                 }
@@ -52,11 +70,12 @@ struct Onboarding: View {
             }
             .padding()
             .navigationDestination(isPresented: $isLoggedIn) {
-                Home()
+                Home(showingAlert1: firstTime)
             }
             .onAppear {
                 if UserDefaults.standard.bool(forKey: kIsLoggedIn) {
                     isLoggedIn = true
+                    firstTime = false
                 }
             }
         }

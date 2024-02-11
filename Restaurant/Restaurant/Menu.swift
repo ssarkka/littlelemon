@@ -1,8 +1,5 @@
 //
-//  Menu.swift
-//  Restaurant
-//
-//  Created by Simo Särkkä on 8.2.2024.
+// Show the menu screen of the app
 //
 
 import SwiftUI
@@ -16,10 +13,13 @@ struct Menu: View {
     @State var filter_desserts = false
     @State var filter_drinks = false
 
+    // Load the menu data and replace the dishes in Core Data with that
     func getMenuData() {
         PersistenceController.shared.clear_all()
         
+        // TODO: this should be in a suitable configuration place
         let urlstr = "https://raw.githubusercontent.com/ssarkka/littlelemon/main/data/menu.json"
+        
         let url = URL(string: urlstr)!
         let urlreq = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: urlreq) {
@@ -40,16 +40,22 @@ struct Menu: View {
                 }
             }
             else {
+                // TODO: should handle error properly
                 print("Oops")
             }
         }
         task.resume()
     }
     
+    // Build descriptor to sort by name in case-insensitve and international manner
     func buildSortDescriptors() -> [NSSortDescriptor] {
-        [NSSortDescriptor(keyPath: \Dish.title, ascending: true)]
+        return [NSSortDescriptor(key: "title",
+                                 ascending: true,
+                                 selector:
+                                    #selector(NSString .localizedCaseInsensitiveCompare))]
     }
     
+    // Build descriptors to filter by search string and buttons
     func buildPredicates() -> NSPredicate {
         var searchPredicate:NSPredicate
         
@@ -145,6 +151,7 @@ struct Menu: View {
                 
                 Divider().frame(height: 2).overlay(Color("Primary1"))
 
+                // TODO: this should be in a suitable configuration place
                 let urlstr = "https://raw.githubusercontent.com/ssarkka/littlelemon/main/data/"
                             
                 VStack {
@@ -195,7 +202,7 @@ struct Menu: View {
     }
 }
 
-
+// Preview which creates a Core Data container on the fly
 #Preview {
     Menu().environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
 }

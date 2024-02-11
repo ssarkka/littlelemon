@@ -1,3 +1,7 @@
+//
+// Core Data handling
+//
+
 import CoreData
 import Foundation
 

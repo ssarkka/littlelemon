@@ -1,13 +1,13 @@
 //
-//  DishDetails.swift
-//  Restaurant
-//
-//  Created by Simo Särkkä on 11.2.2024.
+// This is a Swift View for showing the information of one dish
+// proving a button to order it. In a real applition the order
+// button would probably add the item to the shopping cart.
 //
 
 import SwiftUI
 
 struct DishDetails: View {
+    @State private var showingAlert = false
     let dish:Dish
     
     var body: some View {
@@ -15,6 +15,7 @@ struct DishDetails: View {
             Header(showProfilePhoto: true)
             Hero(searchString: Binding.constant(""), hasSearchField: false)
 
+            // TODO: this should be in a suitable configuration place
             let urlstr = "https://raw.githubusercontent.com/ssarkka/littlelemon/main/data/"
             
             VStack {
@@ -50,13 +51,33 @@ struct DishDetails: View {
             }.padding()
             
             Button("Order now!") {
+                showingAlert = true
             }
             .foregroundColor(.black)
             .background(Color("Primary2"))
             .buttonBorderShape(.roundedRectangle)
             .buttonStyle(.bordered)
+            .alert("Order placed!", isPresented: $showingAlert) {
+                Button("OK", role: .cancel) { }
+            }
             Spacer()
         }
     }
 }
 
+
+// Custom preview which creates single dish to Core Data
+struct DishDetails_Previews: PreviewProvider {
+    static let persistence = PersistenceController.shared
+
+    static var previews: some View {
+        let dish = Dish(context: persistence.container.viewContext)
+        dish.title = "Greek Salad"
+        dish.price = "12.99"
+        dish.desc = "Our delicious salad is served with Feta cheese and peeled cucumber. Includes tomatoes, onions, olives, salt and oregano in the ingredients."
+        dish.image = "greek_salad.png"
+        dish.category = "starters"
+        
+        return DishDetails(dish: dish)
+    }
+}

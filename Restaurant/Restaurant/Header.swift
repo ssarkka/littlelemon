@@ -1,8 +1,5 @@
 //
-//  Header.swift
-//  Restaurant
-//
-//  Created by Simo Särkkä on 10.2.2024.
+// This is the top header of the app, currently purely visual element.
 //
 
 import SwiftUI
@@ -13,20 +10,21 @@ struct Header: View {
     var body: some View {
             ZStack {
                 Image("little-lemon-logo")
-                    .frame(width: .infinity, height: 50, alignment: .topLeading)
+                    .frame(height: 40, alignment: .topLeading)
                 if showProfilePhoto {
-                    HStack {
+                    HStack(spacing: 0) {
                         Spacer()
                         Image("profile-image-placeholder")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50, alignment: .topLeading)
+                            .frame(width: 40, height: 40, alignment: .topLeading)
                     }.padding()
                 }
             }
     }
 }
 
+// Default preview
 #Preview {
     Header()
 }

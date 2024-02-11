@@ -1,8 +1,5 @@
 //
-//  MenuItem.swift
-//  Restaurant
-//
-//  Created by Simo Särkkä on 8.2.2024.
+// Single menuitem for decoding from JSON
 //
 
 import Foundation
