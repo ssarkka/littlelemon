@@ -14,6 +14,7 @@ struct RestaurantApp: App {
     var body: some Scene {
         WindowGroup {
             /*
+            // This would be the canical way of doing this
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
              */

@@ -8,9 +8,9 @@
 import Foundation
 
 struct MenuItem: Decodable {
-    let title:String
-//    let description:String
-    let price:String
+    let name:String
+    let description:String
+    let price:Float
     let image:String
     let category:String
 }

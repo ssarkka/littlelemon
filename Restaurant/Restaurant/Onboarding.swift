@@ -21,26 +21,42 @@ struct Onboarding: View {
     
     var body: some View {
         NavigationStack {
-            Form {
-                VStack {
+            Header(showProfilePhoto: false)
+            Hero(searchString: Binding.constant(""), hasSearchField: false)
+            VStack {
+                VStack(alignment: .leading) {
+                    Text("First name*")
                     TextField("First name", text: $firstName)
+                        .textFieldStyle(.roundedBorder)
+                    Text("Last name*")
                     TextField("Last name", text: $lastName)
+                    Text("Email*")
                     TextField("Email", text: $email)
-                    Button("Register") {
-                        if !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty {
-                            UserDefaults.standard.set(firstName, forKey: kFirstName)
-                            UserDefaults.standard.set(lastName, forKey: kLastName)
-                            UserDefaults.standard.set(email, forKey: kEmail)
-                            UserDefaults.standard.set(true, forKey: kIsLoggedIn)
-                            isLoggedIn = true
-                        }
-                    }
-                }.navigationDestination(isPresented: $isLoggedIn) {
-                    Home()
-                }.onAppear {
-                    if UserDefaults.standard.bool(forKey: kIsLoggedIn) {
+                        .font(.custom("Karla", size: 16))
+                }
+                Button("Register") {
+                    if !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty {
+                        UserDefaults.standard.set(firstName, forKey: kFirstName)
+                        UserDefaults.standard.set(lastName, forKey: kLastName)
+                        UserDefaults.standard.set(email, forKey: kEmail)
+                        UserDefaults.standard.set(true, forKey: kIsLoggedIn)
                         isLoggedIn = true
                     }
+                }
+                .font(.custom("Karla", size: 16))
+                .foregroundColor(.black)
+                .background(Color("Primary2"))
+                .buttonBorderShape(.roundedRectangle)
+                .buttonStyle(.bordered)
+                Spacer()
+            }
+            .padding()
+            .navigationDestination(isPresented: $isLoggedIn) {
+                Home()
+            }
+            .onAppear {
+                if UserDefaults.standard.bool(forKey: kIsLoggedIn) {
+                    isLoggedIn = true
                 }
             }
         }
